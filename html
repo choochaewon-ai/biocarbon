@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BioCarbon Project – 미생물 기반 탄소흡수 재단</title>
+<style>
+  body {
+    font-family: 'Pretendard', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    color: #222;
+  }
+  header {
+    background: #00695c;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  header h1 { font-size: 2rem; margin: 0.5rem 0; }
+  header p { font-size: 1.1rem; }
+
+  section {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  h2 {
+    color: #00796b;
+    border-left: 5px solid #00796b;
+    padding-left: 10px;
+  }
+  button {
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  button:hover { background: #004d40; }
+
+  .result {
+    margin-top: 1.2rem;
+    background: #e0f2f1;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  footer {
+    text-align: center;
+    color: #666;
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <h1>🌿 BioCarbon Project</h1>
+  <p>“대기 속 CO₂를 먹는 미생물, 그리고 그 미생물을 후원하는 사람들”</p>
+</header>
+
+<section id="idea">
+  <h2>🔬 프로젝트 개요</h2>
+  <p>
+    유전자 편집을 통해 광합성 효율이 높은 <strong>탄소흡수 미생물(시아노박테리아)</strong>을 개발합니다.<br>
+    이 미생물을 도시 옥상, 해양 부표 등에 설치된 <strong>BioPatch</strong> 형태로 배양하여 대기 중 CO₂를 흡수합니다.<br><br>
+    시민은 “하나의 패치 후원자”가 되어 자신이 후원한 미생물의 CO₂ 흡수량을 AI 시스템으로 확인할 수 있습니다.
+  </p>
+</section>
+
+<section id="ai-sim">
+  <h2>🤖 AI 탄소흡수량 예측 시뮬레이터</h2>
+  <p>지역 환경 조건을 입력하면 AI가 하루 CO₂ 흡수량을 예측합니다.</p>
+  
+  <label>평균 기온(℃): <input type="number" id="temp" placeholder="예: 25"></label><br><br>
+  <label>일조 시간(시간): <input type="number" id="sunlight" placeholder="예: 8"></label><br><br>
+  <label>습도(%): <input type="number" id="humidity" placeholder="예: 60"></label><br><br>
+
+  <button onclick="predictCO2()">AI 예측 실행</button>
+
+  <div class="result" id="result">AI 예측 결과가 여기에 표시됩니다.</div>
+</section>
+
+<section id="impact">
+  <h2>🌍 기대 효과</h2>
+  <ul>
+    <li>한 개의 BioPatch가 하루 평균 <strong>약 2.5g의 CO₂</strong>를 흡수</li>
+    <li>도심 옥상 1,000개 설치 시 → 연간 약 1톤의 탄소 제거</li>
+    <li>기업 후원 + 시민 참여로 “탄소중립 도시” 실현</li>
+  </ul>
+</section>
+
+<section id="tech">
+  <h2>🧬 생명공학 기술</h2>
+  <p>
+    • CRISPR-Cas9 기반 유전자 편집으로 광합성 효율 향상<br>
+    • 미세조류 배양 환경 최적화<br>
+    • AI 학습을 통한 미생물 생장률 및 탄소고정량 예측
+  </p>
+</section>
+
+<footer>
+  © 2025 BioCarbon Foundation | AI × Bio for a Sustainable Earth
+</footer>
+
+<script>
+function predictCO2() {
+  const temp = parseFloat(document.getElementById('temp').value);
+  const sunlight = parseFloat(document.getElementById('sunlight').value);
+  const humidity = parseFloat(document.getElementById('humidity').value);
+  const resultDiv = document.getElementById('result');
+
+  if (isNaN(temp) || isNaN(sunlight) || isNaN(humidity)) {
+    resultDiv.innerText = "⚠️ 모든 값을 입력해주세요!";
+    return;
+  }
+
+  // 단순 AI 모형: 온도, 일조시간, 습도 기반 가중 평균
+  let score = (temp * 0.3 + sunlight * 0.5 + humidity * 0.2);
+  let co2 = (score / 10).toFixed(2);
+
+  resultDiv.innerText = `AI 예측 결과: 하루 예상 CO₂ 흡수량은 ${co2} g 입니다.`;
+}
+</script>
+
+</body>
+</html>
